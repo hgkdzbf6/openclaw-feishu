@@ -1,0 +1,22 @@
+# Source files (dist is published)
+*.ts
+!*.d.ts
+src/
+index.ts
+tsconfig.json
+
+# Dev files
+.git/
+.gitignore
+.env*
+*.log
+
+# Build artifacts not needed
+*.tsbuildinfo
+SUMMARY.md
+CHANGELOG.md
+
+# Test files
+*.test.ts
+__tests__/
+coverage/
