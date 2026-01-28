@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/moltbot-feishu.svg)](https://www.npmjs.com/package/moltbot-feishu)
 
-让你的 AI 助手接入飞书，一行命令搞定。
+让你的Moltbot/CLawdbot AI 助手接入飞书，一行命令搞定。
 
 ## 特点
 
