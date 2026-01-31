@@ -7,8 +7,8 @@ import * as Lark from "@larksuiteoapi/node-sdk";
 import type { FeishuProbeResult } from "./types.js";
 
 /**
- * Probe the Feishu API by fetching bot info.
- * Uses the internal tenant access token endpoint.
+ * Probe the Feishu API by validating credentials via tenant_access_token/internal.
+ * @larksuiteoapi/node-sdk does not expose bot.v3.botInfo; we use auth instead.
  */
 export async function probeFeishu(
   appId: string,
@@ -29,23 +29,12 @@ export async function probeFeishu(
       appType: Lark.AppType.SelfBuild,
     });
 
-    // Use bot info endpoint to validate credentials
-    const response = await (client as unknown as { bot: { v3: { botInfo: { get: (opts: Record<string, unknown>) => Promise<{ data?: { bot?: Record<string, unknown> } }> } } } }).bot.v3.botInfo.get({});
+    // Validate credentials via tenant_access_token/internal (self-built app)
+    await client.auth.v3.tenantAccessToken.internal({
+      data: { app_id: appId.trim(), app_secret: appSecret.trim() },
+    });
 
     const elapsedMs = Date.now() - startTime;
-
-    const bot = response?.data?.bot;
-    if (bot) {
-      return {
-        ok: true,
-        bot: {
-          name: (bot as Record<string, unknown>).bot_name as string | undefined,
-          openId: (bot as Record<string, unknown>).open_id as string | undefined,
-        },
-        elapsedMs,
-      };
-    }
-
     return { ok: true, elapsedMs };
   } catch (err) {
     const elapsedMs = Date.now() - startTime;

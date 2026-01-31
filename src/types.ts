@@ -2,7 +2,7 @@
  * Feishu channel plugin — type definitions.
  */
 
-/** Per-account configuration stored in clawdbot.json channels.feishu */
+/** Per-account configuration stored in openclaw.json channels.feishu */
 export type FeishuAccountConfig = {
   /** Optional display name for this account. */
   name?: string;

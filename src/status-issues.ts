@@ -2,7 +2,7 @@
  * Diagnostic issues collector for Feishu channel.
  */
 
-import type { ChannelAccountSnapshot, ChannelStatusIssue } from "clawdbot/plugin-sdk";
+import type { ChannelAccountSnapshot, ChannelStatusIssue } from "openclaw/plugin-sdk";
 
 type FeishuAccountStatus = {
   accountId?: unknown;
@@ -48,7 +48,7 @@ export function collectFeishuStatusIssues(
         accountId,
         kind: "config",
         message: "Feishu account is enabled but not configured (missing appId or appSecret).",
-        fix: "Set channels.feishu.appId and channels.feishu.appSecret in clawdbot.json.",
+        fix: "Set channels.feishu.appId and channels.feishu.appSecret in openclaw.json.",
       });
     }
 

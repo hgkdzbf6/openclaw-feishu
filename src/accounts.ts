@@ -2,8 +2,8 @@
  * Feishu account resolution — multi-account support.
  */
 
-import type { ClawdbotConfig } from "clawdbot/plugin-sdk";
-import { DEFAULT_ACCOUNT_ID, normalizeAccountId } from "clawdbot/plugin-sdk";
+import type { ClawdbotConfig } from "openclaw/plugin-sdk";
+import { DEFAULT_ACCOUNT_ID, normalizeAccountId } from "openclaw/plugin-sdk";
 
 import type {
   FeishuAccountConfig,
@@ -62,13 +62,13 @@ function resolveCredentials(
     return { appId: merged.appId.trim(), appSecret: merged.appSecret.trim(), source: "config" };
   }
 
-  // From plugin config (plugins.entries.feishu.config)
+  // From plugin config: plugins.entries.openclaw-feishu only (plugin id; do not use plugins.entries.feishu — causes "plugin not found: feishu")
   const pluginCfg = (cfg as Record<string, unknown>).plugins as
-    | { entries?: Record<string, { config?: Record<string, string> }> }
+    | { entries?: Record<string, { appId?: string; appSecret?: string }> }
     | undefined;
-  const feishuPluginCfg = pluginCfg?.entries?.feishu?.config;
-  if (feishuPluginCfg?.appId?.trim() && feishuPluginCfg?.appSecret?.trim()) {
-    return { appId: feishuPluginCfg.appId.trim(), appSecret: feishuPluginCfg.appSecret.trim(), source: "plugin" };
+  const feishuPluginEntry = pluginCfg?.entries?.["openclaw-feishu"];
+  if (feishuPluginEntry?.appId?.trim() && feishuPluginEntry?.appSecret?.trim()) {
+    return { appId: feishuPluginEntry.appId.trim(), appSecret: feishuPluginEntry.appSecret.trim(), source: "plugin" };
   }
 
   return { appId: "", appSecret: "", source: "none" };

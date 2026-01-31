@@ -1,27 +1,31 @@
 /**
- * Feishu (Lark) channel plugin for Clawdbot/Moltbot.
+ * Feishu (Lark) channel plugin for Openclaw.
  *
  * Connects Feishu bots via WebSocket long-connection (no public server required).
  */
 
-import type { ClawdbotPluginApi } from "clawdbot/plugin-sdk";
+import type { ClawdbotPluginApi } from "openclaw/plugin-sdk";
 
 import { feishuDock, feishuPlugin } from "./src/channel.js";
 import { setFeishuRuntime } from "./src/runtime.js";
 
+const pluginConfigSchema = {
+  toJSONSchema: () =>
+    ({
+      type: "object",
+      properties: {
+        appId: { type: "string", description: "Feishu app ID (optional; can be set per-account in channels.feishu)" },
+        appSecret: { type: "string", description: "Feishu app secret (optional; can be set per-account in channels.feishu)" },
+      },
+      additionalProperties: true,
+    }),
+};
+
 const plugin = {
-  id: "feishu",
+  id: "openclaw-feishu",
   name: "Feishu",
   description: "Feishu (Lark) channel plugin — WebSocket long-connection bot",
-  configSchema: {
-    type: "object" as const,
-    properties: {
-      appId: { type: "string" as const, description: "Feishu App ID" },
-      appSecret: { type: "string" as const, description: "Feishu App Secret" },
-    },
-    required: ["appId", "appSecret"] as const,
-    additionalProperties: false as const,
-  },
+  configSchema: pluginConfigSchema,
   register(api: ClawdbotPluginApi) {
     setFeishuRuntime(api.runtime);
 

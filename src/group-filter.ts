@@ -6,7 +6,7 @@
  */
 
 /** Default bot name patterns for address detection. */
-const DEFAULT_BOT_NAMES = ["clawdbot", "moltbot", "bot", "助手", "智能体"];
+const DEFAULT_BOT_NAMES = ["openclaw", "bot", "助手", "智能体"];
 
 /**
  * Determine whether the bot should respond to a group message.

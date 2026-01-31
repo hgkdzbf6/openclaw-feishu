@@ -2,11 +2,11 @@
  * Feishu WebSocket message receive handler.
  *
  * Connects to Feishu via the SDK's WSClient, dispatches incoming
- * messages to Clawdbot's channel reply infrastructure.
+ * messages to Openclaw's channel reply infrastructure.
  */
 
 import * as Lark from "@larksuiteoapi/node-sdk";
-import type { ClawdbotConfig } from "clawdbot/plugin-sdk";
+import type { ClawdbotConfig } from "openclaw/plugin-sdk";
 
 import type { ResolvedFeishuAccount } from "./types.js";
 import { isDuplicate } from "./dedup.js";
@@ -141,7 +141,7 @@ async function handleIncomingMessage(
 
   ctx.log.info(`[feishu:${ctx.account.accountId}] Received from ${senderId}: ${text.slice(0, 80)}`);
 
-  // Dispatch via Clawdbot runtime
+  // Dispatch via Openclaw runtime
   const runtime = getFeishuRuntime();
   const channel = (runtime as Record<string, unknown>).channel as
     | { reply?: { dispatchReplyWithBufferedBlockDispatcher?: (opts: unknown) => Promise<unknown> } }

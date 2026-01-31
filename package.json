@@ -1,21 +1,20 @@
 {
-  "name": "moltbot-feishu",
-  "version": "0.1.0",
+  "name": "openclaw-feishu",
+  "version": "0.1.3",
   "type": "module",
-  "description": "飞书机器人插件 - 让 AI 助手接入飞书，无需服务器 | Feishu/Lark channel plugin for Moltbot",
-  "author": "Alex Yang <anyangsen@hotmail.com>",
+  "description": "飞书机器人插件 - 让 AI 助手接入飞书，无需服务器 | Feishu/Lark channel plugin for Openclaw",
+  "author": "hgkdzbf6 <hgkdzbf6@qq.com>",
   "license": "MIT",
-  "homepage": "https://github.com/AlexAnys/moltbot-feishu",
+  "homepage": "https://github.com/hgkdzbf6/openclaw-feishu",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AlexAnys/moltbot-feishu.git"
+    "url": "git+https://github.com/hgkdzbf6/openclaw-feishu.git"
   },
   "bugs": {
-    "url": "https://github.com/AlexAnys/moltbot-feishu/issues"
+    "url": "https://github.com/hgkdzbf6/openclaw-feishu/issues"
   },
   "keywords": [
-    "moltbot",
-    "clawdbot",
+    "openclaw",
     "feishu",
     "lark",
     "飞书",
@@ -38,7 +37,7 @@
   },
   "files": [
     "dist",
-    "clawdbot.plugin.json",
+    "openclaw.plugin.json",
     "README.md",
     "LICENSE"
   ],
@@ -61,7 +60,7 @@
       "quickstartAllowFrom": true
     },
     "install": {
-      "npmSpec": "moltbot-feishu",
+      "npmSpec": "openclaw-feishu",
       "defaultChoice": "npm"
     }
   },
@@ -72,16 +71,17 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "clawdbot": ">=2026.1.20"
+    "openclaw": ">=2026.1.20"
   },
   "peerDependenciesMeta": {
-    "clawdbot": {
+    "openclaw": {
       "optional": false
     }
   },
   "dependencies": {
     "@larksuiteoapi/node-sdk": "^1.56.1",
-    "zod": "^3.24.0"
+    "zod": "^3.24.0",
+    "zod-to-json-schema": "^3.24.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

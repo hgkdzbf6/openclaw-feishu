@@ -7,7 +7,7 @@ import type {
   ChannelDock,
   ChannelPlugin,
   ClawdbotConfig,
-} from "clawdbot/plugin-sdk";
+} from "openclaw/plugin-sdk";
 import {
   applyAccountNameToChannelSection,
   buildChannelConfigSchema,
@@ -18,13 +18,15 @@ import {
   normalizeAccountId,
   PAIRING_APPROVED_MESSAGE,
   setAccountEnabledInConfigSection,
-} from "clawdbot/plugin-sdk";
+} from "openclaw/plugin-sdk";
 
 import {
   listFeishuAccountIds,
   resolveDefaultFeishuAccountId,
   resolveFeishuAccount,
 } from "./accounts.js";
+import { zodToJsonSchema } from "zod-to-json-schema";
+
 import type { ResolvedFeishuAccount } from "./types.js";
 import { FeishuConfigSchema } from "./config-schema.js";
 import { feishuOnboardingAdapter } from "./onboarding.js";
@@ -105,7 +107,9 @@ export const feishuPlugin: ChannelPlugin<ResolvedFeishuAccount> = {
     blockStreaming: true,
   },
   reload: { configPrefixes: ["channels.feishu"] },
-  configSchema: buildChannelConfigSchema(FeishuConfigSchema),
+  configSchema: buildChannelConfigSchema({
+    toJSONSchema: () => zodToJsonSchema(FeishuConfigSchema, { $refStrategy: "none" }),
+  }),
   config: {
     listAccountIds: (cfg) => listFeishuAccountIds(cfg as ClawdbotConfig),
     resolveAccount: (cfg, accountId) =>
