@@ -1,0 +1,15 @@
+{
+  "id": "openclaw-feishu",
+  "name": "Feishu",
+  "description": "Feishu (飞书/Lark) channel plugin — WebSocket long-connection bot",
+  "version": "0.1.0",
+  "channels": ["feishu"],
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "appId": { "type": "string", "description": "Feishu app ID (optional; can be set per-account in channels.feishu)" },
+      "appSecret": { "type": "string", "description": "Feishu app secret (optional; can be set per-account in channels.feishu)" }
+    }
+  }
+}
